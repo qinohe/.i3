@@ -1,0 +1,7 @@
+#!/bin/bash
+# Executed by 'XF86Launch'
+# Sends a message to i3 and excutes mocp in xterm, and toggles play.
+# Playing is only possible if the cursor was 'in' the playlist before closing.
+i3-msg "exec --no-startup-id xterm -e mocp & mocp -p; workspace 0:media";
+exit 0
+

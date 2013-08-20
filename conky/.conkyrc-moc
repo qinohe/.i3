@@ -1,0 +1,66 @@
+# An album art conky for DeadBeef
+
+background no
+update_interval 1
+cpu_avg_samples 2
+net_avg_samples 2
+double_buffer yes
+no_buffers yes
+text_buffer_size 1024
+imlib_cache_size 0
+
+own_window yes
+own_window_type override
+own_window_transparent yes
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+
+border_inner_margin 1
+border_outer_margin 0
+
+minimum_size 200 200
+maximum_width 500
+
+alignment tr
+gap_x 250
+gap_y 295
+
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+default_shade_color 181818
+
+use_xft yes
+xftfont Droid Sans:size=9
+xftalpha 1.0
+uppercase no
+override_utf8_locale yes
+
+# color defs - change as required
+color1 EDEDED
+color2 Gray
+color3 White
+color4 DarkSlateGray
+color5 BF3809
+color6 black
+color7 324371
+#color8 947C64
+color8 E3E3DB
+color9 120E0B
+color10 yellow
+
+
+TEXT
+#${color5}${voffset 5}${goto 10}${font DejaVu Sans Mono:bold:size=11}${execi 2 mocp -i}$font
+#${color5}${voffset 5}${goto 10}${font DejaVu Sans Mono:bold:size=11}${execi 2 mocp -Q %state}$font
+#${color5}${voffset 5}${goto 10}${font DejaVu Sans Mono:bold:size=11}${execi 2 mocp -Q %file}$font
+${color5}${voffset 5}${goto 10}${font DejaVu Sans Mono:bold:size=11}${execi 2 mocp -Q %artist}$font
+${color5}${voffset 5}${goto 10}${font DejaVu Sans Mono:bold:size=11}${execi 2 mocp -Q %album}$font
+${color5}${voffset 5}${goto 10}${font DejaVu Sans Mono:bold:size=11}${execi 2 mocp -Q %song}$font
+
+
+
+
+
+
+

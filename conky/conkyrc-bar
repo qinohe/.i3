@@ -1,0 +1,17 @@
+out_to_x no
+own_window no
+out_to_console yes
+double_buffer no
+background no
+update_interval 1
+total_run_times 0
+short_units no
+if_up_strictness address
+use_spacer right
+override_utf8_locale yes
+use_xft yes
+cpu_avg_samples 2
+pad_percents 2
+
+TEXT
+$kernel  $loadavg  ${hwmon 0 temp 1}°C:${hwmon 1 temp 1}°C:${hwmon 1 temp 2}°C:${hwmon 1 temp 3}°C  ${time %a,%b %d %H:%M} 

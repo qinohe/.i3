@@ -1,0 +1,79 @@
+alignment tl
+
+default_color white
+default_outline_color black
+default_shade_color black
+double_buffer yes
+
+draw_borders no
+draw_graph_borders no
+draw_outline no
+draw_shades yes
+
+no_buffers yes
+override_utf8_locale yes
+
+own_window yes
+own_window_type override
+own_window_hints below,sticky,undecorated,skip_taskbar,skip_pager
+# own_window_colour black
+own_window_transparent yes
+
+# ARGB can be used for real transparency, 
+# note that a composite manager is required for real transparency
+# own_window_argb_visual true
+
+# Set the transparency alpha value from 0 to 255
+# own_window_argb_value 160
+
+# color defs - change as required
+color5 BF3809
+color7 324371
+
+
+maximum_width 360
+minimum_size 350 
+
+use_xft yes
+xftalpha 0.8
+
+# use normal aor bold version of DejaVu fonts
+xftfont DejaVu Sans Mono:size=10
+# xftfont DejaVu Sans Mono:style=Bold:size=10
+
+total_run_times 0
+
+gap_x 200
+gap_y 100
+#gap_x 450
+#gap_Y -320
+
+text_buffer_size 5000
+update_interval 6
+
+short_units yes
+# pad_percents 2
+imlib_cache_size 0
+# imlib_cache_flush_interval 2
+
+# Fonts used
+# ConkyWindNESW, ConkyWeather, Moon Phases, DejaVu Sans Mono
+
+####### Locations for main program
+############# template0 -> main program
+# executable
+template0 "/usr/bin/conkywx"
+# config file
+#template1 "/home/mark/.config/conkywx/denhelder.conf"
+#template1 "/home/mark/.config/conkywx/eindhoven.conf"
+#template1 "/home/mark/.config/conkywx/nuenen.conf"
+template1 "/home/mark/.config/conkywx/son.conf"
+# template call
+template2 "/home/mark/.config/conkywx/templates/wx-wu-font-slim-template.sh"
+#template2 "/home/mark/.config/conkywx/templates/wx-wu-font-slim-template-1.sh"
+#template2 "/home/mark/.config/conkywx/templates/wx-wu-font-short-template.sh"
+#template2 "/home/mark/.config/conkywx/templates/wx-wu-image-short-template.sh"
+TEXT
+#${font DejaVu Sans Mono:bold:size=11}${color8}Het weer bij ons ${font}
+
+${execpi 900 ${template0} -c "${template1}" -t "${template2}"}

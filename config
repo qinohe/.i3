@@ -1,0 +1,562 @@
+###########################
+# i3 config file (v4)     #
+###########################
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+#
+# This config file uses keycodes (bindsym) and was written for the QWERTY
+# layout.
+#
+# To get a config file with the same key positions, but for your current
+# layout, use the i3-config-wizard
+#
+###############################################################################
+#																	          #
+# IMPORTANT: This config file is modified, and standard keys may have changed #
+# You should check, paths I created, and convert to yours                     #
+# The 'modes', U can use for what ou like.                                    #
+# This is work in progress, not finished nor in a state close to that ;-)     #
+#                                                                             #
+# p.s. don't enable blind, what I have disabled.                              #
+#																	          #
+###############################################################################
+#
+# configured modifier is 'win' key
+set $mod Mod4 
+# set your user name
+set $USER mark
+##set $id --no-startup-id
+
+#########################
+# Floating modifier key #
+#########################
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+workspace_layout tabbed
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below. ISO 10646 = Unicode
+#font -misc-fixed-medium-r-normal--12-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, if you need a lot of unicode glyphs or
+# right-to-left text rendering, you should instead use pango for rendering and
+# chose a FreeType font, such as:
+font pango:DejaVu Sans Mono 9
+#font arial:Sans Mono 14
+
+#        focused_workspace  #888888 #222222 #999999
+#       active_workspace   #333333 #5f776a #ffffff
+#        inactive_workspace #333333 #000000 #999999
+#        urgent_workspace   #2F3344 #900000 #bbbbbb
+# class                 border  backgr. text    indicator
+client.focused          #444444 #777777 #000000 #555555
+client.focused_inactive #aaaaaa #aaaaaa #000000 #484e50
+client.unfocused        #333333 #222222 #aaaaaa #292d2e
+client.urgent           #FDF801 #b00000 #FDF801 #900000
+
+
+# Popups during fullscreen mode
+popup_during_fullscreen smart
+
+
+####################
+# Create i3 socket #
+####################
+ipc-socket ~/.i3/i3-ipc.sock
+
+
+#####################################
+# Border of every new window opened #
+#####################################
+new_window pixel 0
+hide_edge_borders both
+
+
+###################################################
+# Delaying urgency hint reset on workspace change #
+###################################################
+force_display_urgency_hint 500 ms
+
+
+##################################################
+# Assign specific window to predefined workspace #
+##################################################
+assign [class="xterm -e alsamixer "] ## 0:media
+assign [class="Apvlv" instance="apvlv"] 7:office
+assign [class="Brasero" instance="brasero"] 0:media
+assign [class="Deadbeef" instance="deadbeef"] 0:media
+assign [class="Doublecmd" instance="doublecmd"] 5:file
+assign [class="Filezilla" instance="filezilla"] srv
+assign [class="Geany" instance="geany"] 1:dev
+assign [class="Gimp" instance="gimp"] 6:graphic
+assign [class="Inkscape$" instance="inkscape"] 6:graphic
+assign [class="libreoffice-startcenter" instance="VCLSalFrame.DocumentWindow"] 7:office
+assign [class="Xterm -e mocp & mocp -p"] 0:media
+assign [class="Mixxx" instance="mixxx"] 0:media
+assign [class="Meld" instance="meld"] dev
+assign [class="Xterm -e sudo meld "] dev
+assign [class="Opera" instance="opera"] 2:www
+#assign [class="^Orage$" instance="^orage$"] 3:office
+assign [class="Pcmanfm" instance="pcmanfm"] 5:file
+assign [class="Thunderbird" instance="Mail"] mail
+#assign [class="Truecrypt" instance="truecrypt"]
+assign [class="Tuxcmd" instance="tuxcmd"] 5:file
+assign [class="Unison-gtk2" instance="unison-gtk2"] back-up
+assign [class="Virt-manager" instance="virt-manager"] 3:virt
+assign [class="VirtualBox" instance="Qt-subapplication"] 3:virt
+
+
+############################################
+# Enable floating mode for specific window #
+############################################
+for_window [class="7zFM"] floating enable
+for_window [class="Apvlv" ] floating enable
+for_window [class="Baobab"] floating enable
+for_window [class="Blueman-manager"] floating enable
+for_window [class="Blueman-services"] floating enable
+for_window [class="Blueman-adapters"] floating enable
+for_window [class="Deadbeef"] floating enable
+for_window [class="Gimp"] floating enable
+for_window [class="Geany"] floating enable
+for_window [class="Gmrun"] floating enable
+for_window [class="Gnome-nettool"] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [class="Leafpad"] floating enable
+for_window [class="Nitrogen"] floating enable
+for_window [title="Opera"] floating enable
+for_window [class="Orage"] floating enable; focus mode_toggle
+for_window [class="Truecrypt"] floating enable
+for_window [class="Tilda"] floating enable
+#for_window [class="Virt-manager"] floating enable
+for_window [class="Vlc"] floating enable
+for_window [class="XCalc"] floating enable
+for_window [class="Xfce4-notifyd"] floating enable
+for_window [class="XClock"] floating enable
+for_window [class="Xmessage"] floating enable
+for_window [class="XTerm"] floating enable
+
+
+###########################################
+# Automaticly start a program on i3 start #
+# ou can also create a 'mode' to achieve this
+###########################################
+
+#exec --no-startup-id blueman-applet
+#exec --no-startup-id mocicon
+#exec --no-startup-id /usr/bin/nm-applet --sm-disable
+#exec --no-startup-id xcompmgr -c -r 6
+exec  --no-startup-id nitrogen --restore
+#exec --no-startup-id xmessage -file ~/.i3/xmessage
+# mocp
+#exec --no-startup-id i3-msg "workspace 20; exec --no-startup-id xterm -e mocp & mocp -p; workspace 0:media;"
+
+
+
+##############################################################
+# Always automaticly start a program on i3 start, or restart #
+##############################################################
+#exec_always i3-msg border none
+
+
+################################################################################
+# Start i3bar to display a workspace bar (plus the system information i3status #
+# finds out, if available)                                                     #
+################################################################################
+bar {
+		colors {
+      background #000000
+       statusline #999999
+        separator #666666
+
+        focused_workspace  #888888 #222222 #999999
+       active_workspace   #333333 #5f776a #ffffff
+        inactive_workspace #333333 #000000 #999999
+        urgent_workspace   #2F3344 #B00000 #FDF801
+   }
+		status_command /home/$USER/.i3/scripts/conky-i3bar & conky -c /home/$USER/.i3/conky/.conkyrc-w
+#		& conky -c /home/mark/.config/conky/db.conky
+		position top
+#		mode hide
+		workspace_buttons yes
+	
+		font pango:DejaVu Sans Mono, Terminus Bold Semi-Condensed 10
+#		font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+}
+#
+#
+############################################################
+# since there is no bar in i3WM, I will enable xfce4-panel #
+# you can use next bindsym, to start en stop the panel     #
+############################################################
+#
+bindsym $mod+p exec xfce4-panel
+bindsym $mod+Shift+p exec xfce4-panel -q
+#
+#
+#######################################
+# Start a program with a key binding  #
+#######################################
+# start a terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id xterm
+bindsym $mod+Ctrl+Shift+t exec truecrypt
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run
+bindsym $mod+y exec i3-dmenu-desktop
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+
+###########################################################
+# start a program with a key binding & workspace          #
+###########################################################
+bindsym $mod+Ctrl+a exec --no-startup-id xterm -e alsamixer
+bindsym $mod+Ctrl+b exec brasero ; workspace 0:media
+bindsym $mod+Ctrl+c exec tuxcmd ; workspace 5:file
+bindsym $mod+Ctrl+d exec deadbeef ; workspace 0:media
+bindsym $mod+Ctrl+f exec filezilla ; workspace  srv
+bindsym $mod+Ctrl+g exec geany ; workspace 1:dev
+bindsym $mod+Ctrl+Shift+g exec gimp ; workspace 6:graphic
+bindsym $mod+Ctrl+i exec inkscape ; workspace 6:graphic
+bindsym $mod+Ctrl+l exec libreoffice ; workspace 7:office
+bindsym $mod+Ctrl+Shift+m exec mixxx ; workspace 0:media
+#bindsym $mod+Ctrl+m exec xterm -e mocp ; workspace 0:media
+bindsym $mod+Ctrl+Shift+d exec --no-startup-id xterm -e sudo meld ; workspace diff
+bindsym $mod+Ctrl+o exec opera --nomail ; workspace 2:www
+bindsym $mod+Ctrl+Shift+o exec orage
+bindsym $mod+Ctrl+p exec pcmanfm ; workspace 5:file
+bindsym $mod+Ctrl+t exec thunderbird  ; workspace mail
+bindsym $mod+Ctrl+u exec unison-gtk2 ;  workspace back-up
+bindsym $mod+Ctrl+q exec --no-startup-id virt-manager ; workspace 3:virt
+bindsym $mod+Ctrl+v exec virtualbox ; workspace 3:virt
+bindsym $mod+Ctrl+x exec xnviewmp ; workspace 6:graphic
+
+
+#######################################
+# Start a i3 script with a keybinding #
+#######################################
+# Cycle trough, change container layout (stacked, tabbed, toggle split) Trilby made this ;)
+bindsym $mod+z exec /home/$USER/.i3/scripts/switch-layout
+
+
+#################################################
+# Start a local non i3 script with a keybinding #
+#################################################
+bindsym $mod+e exec /home/$USER/.scripts/use/save-bat
+
+
+################################
+#  Focusing/Moving containers  #
+################################
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus ipc-socket /home/$USER/.i3/ipc.sock up
+bindsym $mod+semicolon focus right
+
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+#bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# focus next open geany instance
+#bindsym $mod+q [class="Geany"  title="Geany"] focus
+
+
+#############################################################
+# Changing/renaming (named) workspaces/moving to workspaces #
+#############################################################
+bindsym $mod+0 workspace 0:media
+bindsym $mod+1 workspace 1:dev
+bindsym $mod+2 workspace 2:www
+bindsym $mod+3 workspace 3:virt
+bindsym $mod+4 workspace 4:mail
+bindsym $mod+5 workspace 5:file
+bindsym $mod+6 workspace 6:graphic
+bindsym $mod+7 workspace 7:office
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+
+# move focused container to workspace
+bindsym $mod+Shift+0 move container to workspace 0:media
+bindsym $mod+Shift+1 move container to workspace 1:dev
+bindsym $mod+Shift+2 move container to workspace 2:www
+bindsym $mod+Shift+3 move container to workspace 3:virt
+bindsym $mod+Shift+4 move container to workspace 4:mail
+bindsym $mod+Shift+5 move container to workspace 5:file
+bindsym $mod+Shift+6 move container to workspace 6:graphic
+bindsym $mod+Shift+7 move container to workspace 7:office
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+
+# turn back to penultimate workspace
+workspace_auto_back_and_forth yes
+
+# rename the workspaces
+bindsym $mod+n exec i3-input -F 'rename workspace to %s' -P 'New name: '
+
+
+#########################################
+# Scratchpad, invisable floating window #
+#########################################
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+# Show the sup-mail scratchpad window, if any.
+#bindsym mod4+s [title="^Sup ::"] scratchpad show
+
+
+##############################################################
+# The bindings between '{}',only work                        #
+# when you enter the mode, e.g. enter the 'mode'             #
+##############################################################
+# Resize window (you can also use the mouse for that)        #
+##############################################################
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+
+
+#####################################################################
+# Enter a 'mode' with a 'bind', this activates a workspace with the #
+# name of that mode, and 'urgency hint' set.                        #
+# Once you pass a variable, set in the 'mode', your 'bind' inside   #
+# the 'mode' will be executed.                                      #
+# Once the mode is executed, the urency hint will close, if escaped.#
+#####################################################################
+mode "tray" {
+	# These directory presets are available, 
+	# as soon as the 'tray' mode is entered.
+    bindsym b exec blueman-applet, mode "default"
+    bindsym Shift+b exec pkill blueman-applet, mode "default"
+    bindsym m exec mocicon, mode "default"
+    bindsym o exec orage, mode "default"
+    bindsym n exec /usr/bin/nm-applet --sm-disable, mode "default"
+    bindsym Shift+n exec pkill nm-applet, mode "default"
+    bindsym x exec xcompmgr -cf -r 0 -D 6, mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+			}
+bindsym $mod+t mode "tray" 
+
+mode "part" {
+	# These directory presets are available, 
+	# as soon as the 'part' mode is entered.
+    bindsym d exec pcmanfm /home/$USER/docuus, mode "default"
+    bindsym e exec pcmanfm /etc, mode "default"
+    bindsym h exec pcmanfm /home/$USER/, mode "default"
+    bindsym i exec pcmanfm /home/$USER/.i3, mode "default"
+    bindsym s exec pcmanfm /home/$USER/.scripts, mode "default"
+    bindsym u exec pcmanfm /usr, mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+			}
+bindsym $mod+s mode "part" workspace 5:file
+
+mode "dirs" {
+	# These directory presets are available, 
+	# as soon as the 'dirs' mode is entered.
+    bindsym b exec doublecmd /home/$USER /boot, mode "default"
+    bindsym c exec doublecmd /home/$USER/.config /home/$USER, mode "default"
+    bindsym d exec doublecmd /dev /home/$USER, mode "default"
+    bindsym e exec doublecmd /etc /home/$USER, mode "default"
+    bindsym f exec doublecmd / /, mode "default"
+    bindsym g exec doublecmd /home/$USER /home/$USER, mode "default"
+    bindsym h exec doublecmd /home/$USER /home/$USER, mode "default"
+    bindsym i exec doublecmd /home/$USER /home/$USER/.i3, mode "default"
+    bindsym l exec doublecmd /home/$USER/docuus/Documents/Linux-guides/ /home/$USER/.i3, mode "default"
+    bindsym m exec doublecmd /run/media/mark/media-vps /home/$USER/music, mode "default"
+    bindsym o exec doublecmd /opt /home/$USER, mode "default"
+    bindsym p exec doublecmd /home/$USER/docuus/scripting-programming /home/$USER/.i3, mode "default"
+    bindsym t exec doublecmd /tmp /home/$USER/builds, mode "default"
+    bindsym u exec doublecmd /usr/local /home/$USER, mode "default"
+    bindsym v exec doublecmd /var /home/$USER, mode "default"
+    bindsym w exec doublecmd /home/$USER/.wall /home/$USER/image, mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+		}
+bindsym $mod+u mode "dirs" workspace 5:file
+
+mode "lo" {
+	# These libreoffice presets bind to are available, 
+	# as soon as the 'part' mode is entered.
+	bindsym b exec libreoffice --base, mode "default"
+	bindsym c exec libreoffice --calc, mode "default"
+    bindsym d exec libreoffice --draw, mode "default"
+    bindsym g exec libreoffice --global, mode "default"
+    bindsym h exec libreoffice --web, mode "default"
+    bindsym i exec libreoffice --impress, mode "default"
+    bindsym l exec libreoffice , mode "default"
+    bindsym m exec libreoffice --math, mode "default"
+    bindsym w exec libreoffice --writer, mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+			}
+bindsym $mod+o mode "lo" workspace 7:office
+
+mode "game" {
+	# These game presets are available, 
+	# as soon as the 'game' mode is entered.
+	bindsym e exec etracer, mode "default"
+	bindsym k exec supertuxkart, mode "default"
+    bindsym s exec simutrans, mode "default"
+    bindsym t exec supertux2, mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+			}
+bindsym $mod+g mode "game" workspace 7:office
+
+mode "brows" {
+	# These browser presets are available,
+	# as soon as the 'brows' mode is entered
+	bindsym a exec firefox -new-window https://archlinux.org, mode "default"
+	bindsym b exec firefox -new-window https://bugs.archlinux.org, mode "default"
+	bindsym f exec firefox -new-window https://bbs.archlinux.org, mode "default"
+	bindsym g exec firefox -new-window http://google.com, mode "default"
+	bindsym i exec firefox -new-window http://i3wm.org/docs/userguide.html, mode "default"
+	bindsym k exec firefox -new-window https://www.kernel.org/, mode "default"
+	bindsym l exec firefox -new-window https://linux.org, mode "default"
+	bindsym l exec firefox -new-window https://openvz.org, mode "default"
+	bindsym l exec firefox -new-window http://reddit.com, mode "default"
+	bindsym s exec firefox -new-window http://slashdot.org, mode "default"
+	bindsym y exec firefox -new-window https://youtube.com, mode "default"
+	bindsym w exec firefox -new-window https://wiki.archlinux.org, mode "default"
+	# back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+			}
+bindsym $mod+b mode "brows" workspace 2:www
+
+mode "muzik" {
+	# These mocp presets are available,
+	# as soon as the 'muzik' mode is entered
+	# see 'man mocp' for more clues.
+#	exec --no-startup-id xterm -e mocp & mocp -p; workspace 0:media;"
+	bindsym c exec  mocp -c , mode "default"
+	bindsym space exec xterm -e mocp -G , mode "default"
+	bindsym m exec  --no-startup-id xterm -e mocp, mode "default"
+	bindsym p exec --no-startup-id xterm -e mocp & mocp -p , mode "default"
+	bindsym x exec  --no-startup-id mocp -x , mode "default"
+	# back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+			}
+bindsym $mod+m mode "muzik" workspace 0:media
+
+mode "vr" {
+	# These virtualbox presets are available, 
+	# as soon as the 'vr' mode is entered.
+	bindsym a exec "virtualbox --seamless --startvm arch-news", mode "default"
+	bindsym d exec virtualbox --seamless --startvm debian, mode "default"
+    bindsym f exec virtualbox --seamless --startvm feng, mode "default"
+    bindsym g exec virtualbox --seamless --startvm gentoo, mode "default"
+    bindsym m exec virtualbox --seamless --startvm mint, mode "default"
+    bindsym o exec virtualbox --seamless --startvm ovz, mode "default"
+    bindsym r exec virtualbox --seamless --startvm router, mode "default"
+    bindsym s exec virtualbox --seamless --startvm arch-skype, mode "default"
+    bindsym v exec virtualbox , mode "default"
+    bindsym w exec virtualbox --seamless --startvm win-7, mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+			}
+bindsym $mod+q mode "vr" workspace 3:virt
+
+mode "xit" {
+	# These leave presets are available,
+	# as soon as the 'leave' mode is entered
+	# see 'man i3-nagbar' for more clues.
+	bindsym e i3-nagbar exit'
+	# back to normal: Enter or Escape
+    #bindsym Return mode "default"
+    #bindsym Escape mode "default"
+			}
+bindsym $mod+i mode "xit"
+
+
+##############################
+# Reload, restart or exit i3 #
+##############################
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m  'Exit i3 is your wish?.' -b 'Then hit me!' 'i3-msg exit'"
+
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m  'Exit i3 is your wish?.' -b 'Then hit me!' 'i3-msg exit'"
+
+bindsym $mod+Shift+t exec /home/$USER/.i3/scripts/power
