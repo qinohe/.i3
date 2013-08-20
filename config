@@ -477,7 +477,7 @@ mode "game" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 			}
-bindsym $mod+g mode "game" workspace 7:office
+bindsym $mod+g mode "game" workspace game
 
 mode "brows" {
 	# These browser presets are available,
@@ -489,8 +489,8 @@ mode "brows" {
 	bindsym i exec firefox -new-window http://i3wm.org/docs/userguide.html, mode "default"
 	bindsym k exec firefox -new-window https://www.kernel.org/, mode "default"
 	bindsym l exec firefox -new-window https://linux.org, mode "default"
-	bindsym l exec firefox -new-window https://openvz.org, mode "default"
-	bindsym l exec firefox -new-window http://reddit.com, mode "default"
+	bindsym o exec firefox -new-window https://openvz.org, mode "default"
+	bindsym r exec firefox -new-window http://reddit.com, mode "default"
 	bindsym s exec firefox -new-window http://slashdot.org, mode "default"
 	bindsym y exec firefox -new-window https://youtube.com, mode "default"
 	bindsym w exec firefox -new-window https://wiki.archlinux.org, mode "default"
@@ -534,17 +534,6 @@ mode "vr" {
     bindsym Escape mode "default"
 			}
 bindsym $mod+q mode "vr" workspace 3:virt
-
-mode "xit" {
-	# These leave presets are available,
-	# as soon as the 'leave' mode is entered
-	# see 'man i3-nagbar' for more clues.
-	bindsym e i3-nagbar exit'
-	# back to normal: Enter or Escape
-    #bindsym Return mode "default"
-    #bindsym Escape mode "default"
-			}
-bindsym $mod+i mode "xit"
 
 
 ##############################
