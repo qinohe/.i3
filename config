@@ -31,7 +31,8 @@ set $USER mark
 #########################
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-workspace_layout tabbed
+workspace_layout default  
+#tabbed
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -40,22 +41,23 @@ workspace_layout tabbed
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:DejaVu Sans Mono 9
-#font arial:Sans Mono 14
+font pango:DejaVu Sans Mono 10
+#font arial:Sans Mono 18
 
-#        focused_workspace  #888888 #222222 #999999
-#       active_workspace   #333333 #5f776a #ffffff
-#        inactive_workspace #333333 #000000 #999999
-#        urgent_workspace   #2F3344 #900000 #bbbbbb
 # class                 border  backgr. text    indicator
-client.focused          #444444 #777777 #000000 #555555
+client.focused          #CF2020 #777777 #222222 #555555
 client.focused_inactive #aaaaaa #aaaaaa #000000 #484e50
-client.unfocused        #333333 #222222 #aaaaaa #292d2e
+client.unfocused        #333333 #666666 #aaaaaa #292d2e
 client.urgent           #FDF801 #b00000 #FDF801 #900000
 
 
 # Popups during fullscreen mode
 popup_during_fullscreen smart
+
+########################
+# loed saved workspace #
+########################
+exec --no-startup-id "i3-msg 'workspace 2dev; append_layout /home/mark/.i3/workspace-2.json'"
 
 
 ####################
@@ -67,8 +69,9 @@ ipc-socket ~/.i3/i3-ipc.sock
 #####################################
 # Border of every new window opened #
 #####################################
-new_window pixel 0
-hide_edge_borders both
+new_window pixel 1
+#hide_edge_borders both
+#hide_edge_borders vertical
 
 
 ###################################################
@@ -80,49 +83,42 @@ force_display_urgency_hint 500 ms
 ##################################################
 # Assign specific window to predefined workspace #
 ##################################################
-assign [class="xterm -e alsamixer "] ## 0:media
-assign [class="Apvlv" instance="apvlv"] 7:office
-assign [class="Brasero" instance="brasero"] 0:media
-assign [class="Deadbeef" instance="deadbeef"] 0:media
-assign [class="Doublecmd" instance="doublecmd"] 5:file
+assign [class="Apvlv" instance="apvlv"] $space8
+assign [class="Brasero" instance="brasero"] $space9
+assign [class="Cinelerra"] $space6
+assign [class="Deadbeef" instance="deadbeef"] $space9
+assign [class="Doublecmd" instance="doublecmd"] $space6
 assign [class="Filezilla" instance="filezilla"] srv
-assign [class="Geany" instance="geany"] 1:dev
-assign [class="Gimp" instance="gimp"] 6:graphic
-assign [class="Inkscape$" instance="inkscape"] 6:graphic
-assign [class="libreoffice-startcenter" instance="VCLSalFrame.DocumentWindow"] 7:office
-assign [class="Xterm -e mocp & mocp -p"] 0:media
-assign [class="Mixxx" instance="mixxx"] 0:media
-assign [class="Meld" instance="meld"] dev
-assign [class="Xterm -e sudo meld "] dev
-assign [class="Opera" instance="opera"] 2:www
-#assign [class="^Orage$" instance="^orage$"] 3:office
-assign [class="Pcmanfm" instance="pcmanfm"] 5:file
-assign [class="Thunderbird" instance="Mail"] mail
+assign [class="Firefox" instance="Navigator"] $space3
+assign [class="Geany" instance="geany"] $space2
+assign [class="Gimp" instance="gimp"] $space7
+assign [class="Inkscape$" instance="inkscape"] $space7
+assign [class="libreoffice-startcenter" instance="VCLSalFrame.DocumentWindow"] $space8
+assign [class="Xterm -e mocp & mocp -p"] $space9
+assign [class="Mixxx" instance="mixxx"] $space9
+assign [class="Meld" instance="meld"] $space2
+assign [class="Xterm -e sudo meld "] $space2
+assign [class="Opera" instance="opera"] $space3
+assign [class="Pcmanfm" instance="pcmanfm"] $space6
+assign [class="Thunderbird" instance="Mail"] $space5
 #assign [class="Truecrypt" instance="truecrypt"]
-assign [class="Tuxcmd" instance="tuxcmd"] 5:file
+assign [class="Tuxcmd" instance="tuxcmd"] $space6
 assign [class="Unison-gtk2" instance="unison-gtk2"] back-up
-assign [class="Virt-manager" instance="virt-manager"] 3:virt
-assign [class="VirtualBox" instance="Qt-subapplication"] 3:virt
+assign [class="Virt-manager" instance="virt-manager"] $space4
+assign [class="VirtualBox" instance="Qt-subapplication"] $space4
 
 
 ############################################
 # Enable floating mode for specific window #
 ############################################
 for_window [class="7zFM"] floating enable
-for_window [class="Apvlv" ] floating enable
-for_window [class="Baobab"] floating enable
-for_window [class="Blueman-manager"] floating enable
-for_window [class="Blueman-services"] floating enable
-for_window [class="Blueman-adapters"] floating enable
+for_window [class="Cinelerra"] floating enable
 for_window [class="Deadbeef"] floating enable
-for_window [class="Gimp"] floating enable
-for_window [class="Geany"] floating enable
 for_window [class="Gmrun"] floating enable
 for_window [class="Gnome-nettool"] floating enable
 for_window [class="Lxappearance"] floating enable
-for_window [class="Leafpad"] floating enable
 for_window [class="Nitrogen"] floating enable
-for_window [title="Opera"] floating enable
+for_window [title="Oggconvert"] floating enable
 for_window [class="Orage"] floating enable; focus mode_toggle
 for_window [class="Truecrypt"] floating enable
 for_window [class="Tilda"] floating enable
@@ -132,7 +128,7 @@ for_window [class="XCalc"] floating enable
 for_window [class="Xfce4-notifyd"] floating enable
 for_window [class="XClock"] floating enable
 for_window [class="Xmessage"] floating enable
-for_window [class="XTerm"] floating enable
+
 
 
 ###########################################
@@ -140,15 +136,8 @@ for_window [class="XTerm"] floating enable
 # ou can also create a 'mode' to achieve this
 ###########################################
 
-#exec --no-startup-id blueman-applet
-#exec --no-startup-id mocicon
-#exec --no-startup-id /usr/bin/nm-applet --sm-disable
-#exec --no-startup-id xcompmgr -c -r 6
 exec  --no-startup-id nitrogen --restore
-#exec --no-startup-id xmessage -file ~/.i3/xmessage
-# mocp
-#exec --no-startup-id i3-msg "workspace 20; exec --no-startup-id xterm -e mocp & mocp -p; workspace 0:media;"
-
+#exec --no-startup-id /usr/bin/nm-applet --sm-disable
 
 
 ##############################################################
@@ -166,30 +155,22 @@ bar {
       background #000000
        statusline #999999
         separator #666666
-
-        focused_workspace  #888888 #222222 #999999
-       active_workspace   #333333 #5f776a #ffffff
-        inactive_workspace #333333 #000000 #999999
-        urgent_workspace   #2F3344 #B00000 #FDF801
+                           #border #backgr #text
+        focused_workspace  #63630E #666666 #222222
+        active_workspace   #FFFF00 #666666 #000000
+        inactive_workspace #333333 #222222 #666666
+        urgent_workspace   #888888 #222222 #FDF801
    }
-		status_command /home/$USER/.i3/scripts/conky-i3bar & conky -c /home/$USER/.i3/conky/.conkyrc-w
-#		& conky -c /home/mark/.config/conky/db.conky
+		status_command  /home/$USER/.i3/scripts/conky-i3bar
+##& conky -c /home/$USER/.i3/conky/weatherc
 		position top
 #		mode hide
 		workspace_buttons yes
 	
 		font pango:DejaVu Sans Mono, Terminus Bold Semi-Condensed 10
-#		font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+##, Icons 12
+# 		font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 }
-#
-#
-############################################################
-# since there is no bar in i3WM, I will enable xfce4-panel #
-# you can use next bindsym, to start en stop the panel     #
-############################################################
-#
-bindsym $mod+p exec xfce4-panel
-bindsym $mod+Shift+p exec xfce4-panel -q
 #
 #
 #######################################
@@ -198,42 +179,36 @@ bindsym $mod+Shift+p exec xfce4-panel -q
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec --no-startup-id xterm
-bindsym $mod+Ctrl+Shift+t exec truecrypt
 # kill focused window
-bindsym $mod+Shift+q kill
-
+bindsym $mod+Shift+i kill
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
-bindsym $mod+y exec i3-dmenu-desktop
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+y exec i3-dmenu-desktop
 
 
 ###########################################################
 # start a program with a key binding & workspace          #
 ###########################################################
 bindsym $mod+Ctrl+a exec --no-startup-id xterm -e alsamixer
-bindsym $mod+Ctrl+b exec brasero ; workspace 0:media
-bindsym $mod+Ctrl+c exec tuxcmd ; workspace 5:file
-bindsym $mod+Ctrl+d exec deadbeef ; workspace 0:media
-bindsym $mod+Ctrl+f exec filezilla ; workspace  srv
-bindsym $mod+Ctrl+g exec geany ; workspace 1:dev
-bindsym $mod+Ctrl+Shift+g exec gimp ; workspace 6:graphic
-bindsym $mod+Ctrl+i exec inkscape ; workspace 6:graphic
-bindsym $mod+Ctrl+l exec libreoffice ; workspace 7:office
-bindsym $mod+Ctrl+Shift+m exec mixxx ; workspace 0:media
-#bindsym $mod+Ctrl+m exec xterm -e mocp ; workspace 0:media
+bindsym $mod+Ctrl+b exec brasero ; workspace $space9
+bindsym $mod+Ctrl+c exec tuxcmd ; workspace $space6
+bindsym $mod+Ctrl+d exec deadbeef ; workspace $space9
+bindsym $mod+Ctrl+f exec firefox ; workspace $space3
+bindsym $mod+Ctrl+g exec geany ; workspace $space2
+bindsym $mod+Ctrl+Shift+g exec gimp ; workspace $space7
+bindsym $mod+Ctrl+i exec inkscape ; workspace $space7
+bindsym $mod+Ctrl+Shift+m exec mixxx ; workspace $space9
 bindsym $mod+Ctrl+Shift+d exec --no-startup-id xterm -e sudo meld ; workspace diff
-bindsym $mod+Ctrl+o exec opera --nomail ; workspace 2:www
-bindsym $mod+Ctrl+Shift+o exec orage
-bindsym $mod+Ctrl+p exec pcmanfm ; workspace 5:file
-bindsym $mod+Ctrl+t exec thunderbird  ; workspace mail
+#bindsym $mod+Ctrl+o exec opera --nomail ; workspace $space3
+bindsym $mod+Ctrl+o exec opera ; workspace $space3
+bindsym $mod+Ctrl+p exec pcmanfm ; workspace $space6
+bindsym $mod+Ctrl+t exec thunderbird  ; workspace $space5
 bindsym $mod+Ctrl+u exec unison-gtk2 ;  workspace back-up
-bindsym $mod+Ctrl+q exec --no-startup-id virt-manager ; workspace 3:virt
-bindsym $mod+Ctrl+v exec virtualbox ; workspace 3:virt
-bindsym $mod+Ctrl+x exec xnviewmp ; workspace 6:graphic
+bindsym $mod+Ctrl+q exec --no-startup-id virt-manager ; workspace $space4
+bindsym $mod+Ctrl+x exec xnviewmp ; workspace $space7
 
 
 #######################################
@@ -241,12 +216,6 @@ bindsym $mod+Ctrl+x exec xnviewmp ; workspace 6:graphic
 #######################################
 # Cycle trough, change container layout (stacked, tabbed, toggle split) Trilby made this ;)
 bindsym $mod+z exec /home/$USER/.i3/scripts/switch-layout
-
-
-#################################################
-# Start a local non i3 script with a keybinding #
-#################################################
-bindsym $mod+e exec /home/$USER/.scripts/use/save-bat
 
 
 ################################
@@ -301,40 +270,64 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+e focus child
 
 # focus next open geany instance
 #bindsym $mod+q [class="Geany"  title="Geany"] focus
 
 
+######################
+# Vars for workspace #
+######################
+#set $space1  moni
+#set $space2 🛠 dev
+#set $space3 🌐 www
+#set $space4 🖧 virt
+#set $space5 🖂 mail
+#set $space6 🗂 file
+#set $space7 🎨 graphic
+#set $space8   office
+#set $space9  media
+
+set $space1  1moni
+set $space2  2dev
+set $space3  3www
+set $space4  4virt
+set $space5  5mail
+set $space6  6file
+set $space7  7graphic
+set $space8  8office
+set $space9  9media
+
+
 #############################################################
 # Changing/renaming (named) workspaces/moving to workspaces #
 #############################################################
-bindsym $mod+0 workspace 0:media
-bindsym $mod+1 workspace 1:dev
-bindsym $mod+2 workspace 2:www
-bindsym $mod+3 workspace 3:virt
-bindsym $mod+4 workspace 4:mail
-bindsym $mod+5 workspace 5:file
-bindsym $mod+6 workspace 6:graphic
-bindsym $mod+7 workspace 7:office
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
+bindsym $mod+1 workspace $space1
+bindsym $mod+2 workspace $space2
+bindsym $mod+3 workspace $space3
+bindsym $mod+4 workspace $space4
+bindsym $mod+5 workspace $space5
+bindsym $mod+6 workspace $space6
+bindsym $mod+7 workspace $space7
+bindsym $mod+8 workspace $space8
+bindsym $mod+9 workspace $space9
+bindsym $mod+0 workspace 0
 
 # move focused container to workspace
-bindsym $mod+Shift+0 move container to workspace 0:media
-bindsym $mod+Shift+1 move container to workspace 1:dev
-bindsym $mod+Shift+2 move container to workspace 2:www
-bindsym $mod+Shift+3 move container to workspace 3:virt
-bindsym $mod+Shift+4 move container to workspace 4:mail
-bindsym $mod+Shift+5 move container to workspace 5:file
-bindsym $mod+Shift+6 move container to workspace 6:graphic
-bindsym $mod+Shift+7 move container to workspace 7:office
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+1 move container to workspace $space1
+bindsym $mod+Shift+2 move container to workspace $space2
+bindsym $mod+Shift+3 move container to workspace $space3
+bindsym $mod+Shift+4 move container to workspace $space4
+bindsym $mod+Shift+5 move container to workspace $space5
+bindsym $mod+Shift+6 move container to workspace $space6
+bindsym $mod+Shift+7 move container to workspace $space7
+bindsym $mod+Shift+8 move container to workspace $space8
+bindsym $mod+Shift+9 move container to workspace $space9
+bindsym $mod+Shift+0 move container to workspace 0
 
 # turn back to penultimate workspace
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
 
 # rename the workspaces
 bindsym $mod+n exec i3-input -F 'rename workspace to %s' -P 'New name: '
@@ -359,6 +352,7 @@ bindsym $mod+minus scratchpad show
 ##############################################################
 # Resize window (you can also use the mouse for that)        #
 ##############################################################
+
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -381,7 +375,7 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
+bindsym $mod+r mode "resize"         
 
 
 
@@ -392,25 +386,36 @@ bindsym $mod+r mode "resize"
 # the 'mode' will be executed.                                      #
 # Once the mode is executed, the urency hint will close, if escaped.#
 #####################################################################
-mode "tray" {
-	# These directory presets are available, 
-	# as soon as the 'tray' mode is entered.
-    bindsym b exec blueman-applet, mode "default"
-    bindsym Shift+b exec pkill blueman-applet, mode "default"
+###############
+# Tray & some #
+###############
+
+set $mode_tray Tray (g) gmrun, (m) mocicon, (n) nm-applet, (Shift+n) pkill nm-applet (o) orage, (p) xfce4-panel, (Shift+p) pkill xfce4-panel, (s) power-script, (t) tilda, (x) xcompmgr, (v) volwheel
+mode "$mode_tray" {
+	bindsym g exec gmrun, mode "default"
     bindsym m exec mocicon, mode "default"
-    bindsym o exec orage, mode "default"
     bindsym n exec /usr/bin/nm-applet --sm-disable, mode "default"
     bindsym Shift+n exec pkill nm-applet, mode "default"
+    bindsym o exec orage, mode "default"
+    bindsym p exec xfce4-panel, mode "default"
+	bindsym Shift+p exec xfce4-panel -q, mode "default"
+	bindsym s exec xterm -e sudo sh /home/$USER/small-scripts/powersafe-on-bat.sh, mode "default"
+	bindsym t exec tilda, mode "default"
+    bindsym v exec volwheel, mode "default"
     bindsym x exec xcompmgr -cf -r 0 -D 6, mode "default"
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
-			}
-bindsym $mod+t mode "tray" 
+}
+bindsym $mod+t mode "$mode_tray"
 
-mode "part" {
-	# These directory presets are available, 
-	# as soon as the 'part' mode is entered.
+
+########
+# File #
+########
+
+set $mode_file File (d) docuus, (e) etc, (h) home, (i) .i3, (s) scripts, (u) usr
+mode "$mode_file" {
     bindsym d exec pcmanfm /home/$USER/docuus, mode "default"
     bindsym e exec pcmanfm /etc, mode "default"
     bindsym h exec pcmanfm /home/$USER/, mode "default"
@@ -420,37 +425,35 @@ mode "part" {
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
-			}
-bindsym $mod+s mode "part" workspace 5:file
+}
+bindsym $mod+s mode "$mode_file"
 
-mode "dirs" {
-	# These directory presets are available, 
-	# as soon as the 'dirs' mode is entered.
-    bindsym b exec doublecmd /home/$USER /boot, mode "default"
-    bindsym c exec doublecmd /home/$USER/.config /home/$USER, mode "default"
-    bindsym d exec doublecmd /dev /home/$USER, mode "default"
-    bindsym e exec doublecmd /etc /home/$USER, mode "default"
-    bindsym f exec doublecmd / /, mode "default"
-    bindsym g exec doublecmd /home/$USER /home/$USER, mode "default"
-    bindsym h exec doublecmd /home/$USER /home/$USER, mode "default"
-    bindsym i exec doublecmd /home/$USER /home/$USER/.i3, mode "default"
-    bindsym l exec doublecmd /home/$USER/docuus/Documents/Linux-guides/ /home/$USER/.i3, mode "default"
-    bindsym m exec doublecmd /run/media/mark/media-vps /home/$USER/music, mode "default"
-    bindsym o exec doublecmd /opt /home/$USER, mode "default"
-    bindsym p exec doublecmd /home/$USER/docuus/scripting-programming /home/$USER/.i3, mode "default"
-    bindsym t exec doublecmd /tmp /home/$USER/builds, mode "default"
-    bindsym u exec doublecmd /usr/local /home/$USER, mode "default"
-    bindsym v exec doublecmd /var /home/$USER, mode "default"
-    bindsym w exec doublecmd /home/$USER/.wall /home/$USER/image, mode "default"
+
+#############
+# Commander #
+#############
+
+set $mode_cmd tuxcmd (b) $USER /boot, (e) $USER/.config $USER, (h) dev $USER, (i) etc $USER, (s) / /, (u) $USER $USER
+mode "$mode_cmd" {
+    bindsym b exec tuxcmd /home/$USER /boot, mode "default"
+    bindsym c exec tuxcmd /home/$USER/.config /home/$USER, mode "default"
+    bindsym d exec tuxcmd /dev /home/$USER, mode "default"
+    bindsym e exec tuxcmd /etc /home/$USER, mode "default"
+    bindsym f exec tuxcmd / /, mode "default"
+    bindsym g exec tuxcmd /home/$USER /home/$USER, mode "default"
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
-		}
-bindsym $mod+u mode "dirs" workspace 5:file
+}
+bindsym $mod+u mode "$mode_cmd" workspace $space6
 
-mode "lo" {
-	# These libreoffice presets bind to are available, 
-	# as soon as the 'part' mode is entered.
+
+##########
+# Office #
+##########
+
+set $mode_office Office (b) base, (c) calc, (d) draw, (g) global, (h) web, (i) impress, (l) libreoffice-menu, (m) math, (w) writer
+mode "$mode_office" {
 	bindsym b exec libreoffice --base, mode "default"
 	bindsym c exec libreoffice --calc, mode "default"
     bindsym d exec libreoffice --draw, mode "default"
@@ -463,12 +466,16 @@ mode "lo" {
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
-			}
-bindsym $mod+o mode "lo" workspace 7:office
+}
+bindsym $mod+o mode "$mode_office" workspace $space8
 
-mode "game" {
-	# These game presets are available, 
-	# as soon as the 'game' mode is entered.
+
+########
+# Game #
+########
+
+set $mode_game Games (e) etracer, (k) supertuxkart, (s) simutrans, (t) supertux2
+mode "$mode_game" {
 	bindsym e exec etracer, mode "default"
 	bindsym k exec supertuxkart, mode "default"
     bindsym s exec simutrans, mode "default"
@@ -476,64 +483,128 @@ mode "game" {
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
-			}
-bindsym $mod+g mode "game" workspace game
+}
+bindsym $mod+g mode "$mode_game" workspace game
 
-mode "brows" {
-	# These browser presets are available,
-	# as soon as the 'brows' mode is entered
-	bindsym a exec firefox -new-window https://archlinux.org, mode "default"
-	bindsym b exec firefox -new-window https://bugs.archlinux.org, mode "default"
-	bindsym f exec firefox -new-window https://bbs.archlinux.org, mode "default"
-	bindsym g exec firefox -new-window http://google.com, mode "default"
-	bindsym i exec firefox -new-window http://i3wm.org/docs/userguide.html, mode "default"
-	bindsym k exec firefox -new-window https://www.kernel.org/, mode "default"
-	bindsym l exec firefox -new-window https://linux.org, mode "default"
-	bindsym o exec firefox -new-window https://openvz.org, mode "default"
-	bindsym r exec firefox -new-window http://reddit.com, mode "default"
-	bindsym s exec firefox -new-window http://slashdot.org, mode "default"
-	bindsym y exec firefox -new-window https://youtube.com, mode "default"
-	bindsym w exec firefox -new-window https://wiki.archlinux.org, mode "default"
-	# back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-			}
-bindsym $mod+b mode "brows" workspace 2:www
 
-mode "muzik" {
-	# These mocp presets are available,
-	# as soon as the 'muzik' mode is entered
-	# see 'man mocp' for more clues.
+#########
+# Music #
+#########
+
+set $mode_music Music (c) clear, (m) mocp, (p) moc+play, (x) kill-moc
+mode "$mode_music" {
 #	exec --no-startup-id xterm -e mocp & mocp -p; workspace 0:media;"
 	bindsym c exec  mocp -c , mode "default"
 	bindsym space exec xterm -e mocp -G , mode "default"
 	bindsym m exec  --no-startup-id xterm -e mocp, mode "default"
 	bindsym p exec --no-startup-id xterm -e mocp & mocp -p , mode "default"
-	bindsym x exec  --no-startup-id mocp -x , mode "default"
-	# back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-			}
-bindsym $mod+m mode "muzik" workspace 0:media
-
-mode "vr" {
-	# These virtualbox presets are available, 
-	# as soon as the 'vr' mode is entered.
-	bindsym a exec "virtualbox --seamless --startvm arch-news", mode "default"
-	bindsym d exec virtualbox --seamless --startvm debian, mode "default"
-    bindsym f exec virtualbox --seamless --startvm feng, mode "default"
-    bindsym g exec virtualbox --seamless --startvm gentoo, mode "default"
-    bindsym m exec virtualbox --seamless --startvm mint, mode "default"
-    bindsym o exec virtualbox --seamless --startvm ovz, mode "default"
-    bindsym r exec virtualbox --seamless --startvm router, mode "default"
-    bindsym s exec virtualbox --seamless --startvm arch-skype, mode "default"
-    bindsym v exec virtualbox , mode "default"
-    bindsym w exec virtualbox --seamless --startvm win-7, mode "default"
+	bindsym x exec  --no-startup-id xterm -e mocp -x , mode "default"
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
-			}
-bindsym $mod+q mode "vr" workspace 3:virt
+}
+bindsym $mod+m mode "$mode_music" workspace $space9
+
+
+########
+# VBox #
+########
+
+#set $mode_vbox Vbox (a) archling, (h) home, (g) gentoo, (x) xubuntu, (v) vbox, (w) win-7
+#mode "$mode_vbox" {
+	#bindsym h exec "virtualbox --seamless --startvm archling-home", mode "default"
+    #bindsym g exec virtualbox --seamless --startvm gentoo, mode "default"
+    #bindsym x exec virtualbox --seamless --startvm xubuntu, mode "default""
+    #bindsym a exec virtualbox --seamless --startvm archling, mode "default"
+    #bindsym v exec virtualbox , mode "default"
+    #bindsym w exec virtualbox --seamless --startvm win-7, mode "default" 
+    ## back to normal: Enter or Escape
+    #bindsym Return mode "default"
+    #bindsym Escape mode "default"
+#}
+#bindsym $mod+q mode "$mode_vbox" workspace $space4
+
+
+########
+# Qemu #
+########
+
+set $mode_qemu Qemu (b) archling-bank, (h) home, (s) archling-serv, (t) test-home, (g) gentoo, (x) xubuntu,  (w) win-7
+mode "$mode_qemu" {
+	bindsym h exec qemu-system-x86_64 --enable-kvm -cdrom /home/mark/media-vps/isoos/archling-home-2014.12.01-x86_64.iso -vga vmware -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default"
+	bindsym s exec qemu-system-x86_64 --enable-kvm -cdrom /home/mark/media-vps/isoos/archling-serv-2014.08.05-x86_64.iso -m 2048 -smp 2 -cpu host, mode "default"
+	bindsym a exec qemu-system-x86_64 --enable-kvm -cdrom /home/mark/media-vps/isoos/archling-2014.07.10-x86_64.iso -vga vmware -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default"
+    bindsym g exec qemu-system-x86_64 --enable-kvm -hda /home/mark/media-vps/vbox/gentoo/gentoo.qcow -vga std -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default"
+#    bindsym x exec qemu-system-x86_64 --enable-kvm /home/mark/media-vps/vbox/xubuntu/xubuntu.qcow -vga vmware -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default" 
+	bindsym x exec qemu-system-x86_64 --enable-kvm /home/mark/media-vps/vbox/xubuntu/xubuntu.qcow -vga vmware -m 2048 -cpu host -usbdevice tablet, mode "default" 
+    bindsym b exec qemu-system-x86_64 --enable-kvm -cdrom /mnt/media-vps/isoos/archling-bank-2014.08.03-x86_64.iso -vga vmware -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default"
+    bindsym v exec virt-manager , mode "default"
+    bindsym w exec qemu-system-x86_64 --enable-kvm /home/mark/media-vps/vbox/win-7/win-7.img -vga std -m 2048 -smp 2 -usbdevice tablet, mode "default" 
+    bindsym t exec qemu-system-x86_64 --enable-kvm -cdrom /home/mark/media-vps/isoos/install-amd64-minimal-20130110.iso -vga vmware -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+q mode "$mode_qemu" workspace $space4
+
+
+#########
+# power #
+#########
+
+set $mode_system State (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id /home/$USER/.i3/scripts/i3exit lock, mode "default"
+    bindsym e exec --no-startup-id /home/$USER/.i3/scripts/i3exit logout, mode "default"
+    bindsym s exec --no-startup-id /home/$USER/.i3/scripts/i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id /home/$USER/.i3/scripts/i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id /home/$USER/.i3/scripts/i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id /home/$USER/.i3/scripts/i3exit shutdown, mode "default"  
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Pause mode "$mode_system"
+
+
+######################
+# Restore workspaces #
+######################
+
+
+##################
+# Lock workspace #
+##################
+
+set $mode_screen Multi-monitor setup: (c)lock all, (e)lock screen-1, (l)lock screen-2, (s)lock whatever
+mode "$mode_screen" {
+    bindsym c exec --no-startup-id i3lock --output $OUTPUT_E --auto --output $OUTPUT_I --auto
+    bindsym e exec --no-startup-id i3lock --output $OUTPUT_E --auto --output $OUTPUT_I --off
+    bindsym i exec --no-startup-id i3lock --output $OUTPUT_I --auto --output $OUTPUT_E --off
+    bindsym s exec --no-startup-id i3lock --output $OUTPUT_I --auto && xrandr --output $OUTPUT_E --right-of $OUTPUT_I
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Ctrl+m mode "$mode_screen"
+
+
+###########
+# Back Up #
+###########
+
+set $mode_backup BackUp (a) all-1, (e) etc, (h) home, (s) sys
+mode "$mode_backup" {
+    bindsym a exec sudo rsync -aAXv  /* /run/media/mark/bak-n75/back-sys --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*",/lost+found}"
+    bindsym e exec xterm -hold -e "sudo rsync -aAXv --delete /etc/* /run/media/mark/WAYBACK/etc --exclude={/lost+found}"
+    bindsym h exec xterm -hold -e "sudo rsync -aAXv --delete /home/* /run/media/mark/WAYBACK/home --exclude={/lost+found}"
+    bindsym s exec --no-startup-id xterm -e sudo rsync & sudo rsync -aAXv --delete /* /run/media/mark/WAYBACK/back-sys --exclude={/dev/*,/etc/*,/home/*,/media/*,/mnt/*,/proc/*,/run/*,/sys/*,/tmp/*,/lost+found} , mode "default"
+    bindsym m exec sudo rsync -aAXv /mnt/media-vps/* /run/media/mark/bak-n75/back-data --exclude={/.Trash-1000}"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+b mode "$mode_backup"
 
 
 ##############################
@@ -548,4 +619,4 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m  'Exit i3 is your wish?.' -b 
 
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m  'Exit i3 is your wish?.' -b 'Then hit me!' 'i3-msg exit'"
 
-bindsym $mod+Shift+t exec /home/$USER/.i3/scripts/power
+
