@@ -86,8 +86,6 @@ force_display_urgency_hint 500 ms
 assign [class="Apvlv" instance="apvlv"] $space8
 assign [class="Brasero" instance="brasero"] $space9
 assign [class="Cinelerra"] $space6
-assign [class="Deadbeef" instance="deadbeef"] $space9
-assign [class="Doublecmd" instance="doublecmd"] $space6
 assign [class="Filezilla" instance="filezilla"] srv
 assign [class="Firefox" instance="Navigator"] $space3
 assign [class="Geany" instance="geany"] $space2
@@ -101,9 +99,7 @@ assign [class="Xterm -e sudo meld "] $space2
 assign [class="Opera" instance="opera"] $space3
 assign [class="Pcmanfm" instance="pcmanfm"] $space6
 assign [class="Thunderbird" instance="Mail"] $space5
-#assign [class="Truecrypt" instance="truecrypt"]
 assign [class="Tuxcmd" instance="tuxcmd"] $space6
-assign [class="Unison-gtk2" instance="unison-gtk2"] back-up
 assign [class="Virt-manager" instance="virt-manager"] $space4
 assign [class="VirtualBox" instance="Qt-subapplication"] $space4
 
@@ -111,24 +107,17 @@ assign [class="VirtualBox" instance="Qt-subapplication"] $space4
 ############################################
 # Enable floating mode for specific window #
 ############################################
-for_window [class="7zFM"] floating enable
 for_window [class="Cinelerra"] floating enable
-for_window [class="Deadbeef"] floating enable
 for_window [class="Gmrun"] floating enable
 for_window [class="Gnome-nettool"] floating enable
 for_window [class="Lxappearance"] floating enable
 for_window [class="Nitrogen"] floating enable
 for_window [title="Oggconvert"] floating enable
 for_window [class="Orage"] floating enable; focus mode_toggle
-for_window [class="Truecrypt"] floating enable
 for_window [class="Tilda"] floating enable
-#for_window [class="Virt-manager"] floating enable
-for_window [class="Vlc"] floating enable
 for_window [class="XCalc"] floating enable
 for_window [class="Xfce4-notifyd"] floating enable
-for_window [class="XClock"] floating enable
 for_window [class="Xmessage"] floating enable
-
 
 
 ###########################################
@@ -137,7 +126,6 @@ for_window [class="Xmessage"] floating enable
 ###########################################
 
 exec  --no-startup-id nitrogen --restore
-#exec --no-startup-id /usr/bin/nm-applet --sm-disable
 
 
 ##############################################################
@@ -162,14 +150,11 @@ bar {
         urgent_workspace   #888888 #222222 #FDF801
    }
 		status_command  /home/$USER/.i3/scripts/conky-i3bar
-##& conky -c /home/$USER/.i3/conky/weatherc
 		position top
 #		mode hide
 		workspace_buttons yes
 	
 		font pango:DejaVu Sans Mono, Terminus Bold Semi-Condensed 10
-##, Icons 12
-# 		font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 }
 #
 #
@@ -195,18 +180,15 @@ bindsym $mod+y exec i3-dmenu-desktop
 bindsym $mod+Ctrl+a exec --no-startup-id xterm -e alsamixer
 bindsym $mod+Ctrl+b exec brasero ; workspace $space9
 bindsym $mod+Ctrl+c exec tuxcmd ; workspace $space6
-bindsym $mod+Ctrl+d exec deadbeef ; workspace $space9
 bindsym $mod+Ctrl+f exec firefox ; workspace $space3
 bindsym $mod+Ctrl+g exec geany ; workspace $space2
 bindsym $mod+Ctrl+Shift+g exec gimp ; workspace $space7
 bindsym $mod+Ctrl+i exec inkscape ; workspace $space7
 bindsym $mod+Ctrl+Shift+m exec mixxx ; workspace $space9
 bindsym $mod+Ctrl+Shift+d exec --no-startup-id xterm -e sudo meld ; workspace diff
-#bindsym $mod+Ctrl+o exec opera --nomail ; workspace $space3
 bindsym $mod+Ctrl+o exec opera ; workspace $space3
 bindsym $mod+Ctrl+p exec pcmanfm ; workspace $space6
 bindsym $mod+Ctrl+t exec thunderbird  ; workspace $space5
-bindsym $mod+Ctrl+u exec unison-gtk2 ;  workspace back-up
 bindsym $mod+Ctrl+q exec --no-startup-id virt-manager ; workspace $space4
 bindsym $mod+Ctrl+x exec xnviewmp ; workspace $space7
 
