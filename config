@@ -57,7 +57,7 @@ popup_during_fullscreen smart
 ########################
 # loed saved workspace #
 ########################
-exec --no-startup-id "i3-msg 'workspace 2dev; append_layout /home/mark/.i3/workspace-2.json'"
+exec --no-startup-id "i3-msg 'workspace 2dev; append_layout /home/$USER/.i3/workspace-2.json'"
 
 
 ####################
@@ -531,16 +531,16 @@ bindsym $mod+m mode "$mode_music" workspace $space9
 
 set $mode_qemu Qemu (b) archling-bank, (h) home, (s) archling-serv, (t) test-home, (g) gentoo, (x) xubuntu,  (w) win-7
 mode "$mode_qemu" {
-	bindsym h exec qemu-system-x86_64 --enable-kvm -cdrom /home/mark/media-vps/isoos/archling-home-2014.12.01-x86_64.iso -vga vmware -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default"
-	bindsym s exec qemu-system-x86_64 --enable-kvm -cdrom /home/mark/media-vps/isoos/archling-serv-2014.08.05-x86_64.iso -m 2048 -smp 2 -cpu host, mode "default"
-	bindsym a exec qemu-system-x86_64 --enable-kvm -cdrom /home/mark/media-vps/isoos/archling-2014.07.10-x86_64.iso -vga vmware -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default"
-    bindsym g exec qemu-system-x86_64 --enable-kvm -hda /home/mark/media-vps/vbox/gentoo/gentoo.qcow -vga std -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default"
-#    bindsym x exec qemu-system-x86_64 --enable-kvm /home/mark/media-vps/vbox/xubuntu/xubuntu.qcow -vga vmware -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default" 
-	bindsym x exec qemu-system-x86_64 --enable-kvm /home/mark/media-vps/vbox/xubuntu/xubuntu.qcow -vga vmware -m 2048 -cpu host -usbdevice tablet, mode "default" 
+	bindsym h exec qemu-system-x86_64 --enable-kvm -cdrom /home/$USER/media-vps/isoos/archling-home-2014.12.01-x86_64.iso -vga vmware -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default"
+	bindsym s exec qemu-system-x86_64 --enable-kvm -cdrom /home/$USER/media-vps/isoos/archling-serv-2014.08.05-x86_64.iso -m 2048 -smp 2 -cpu host, mode "default"
+	bindsym a exec qemu-system-x86_64 --enable-kvm -cdrom /home/$USER/media-vps/isoos/archling-2014.07.10-x86_64.iso -vga vmware -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default"
+    bindsym g exec qemu-system-x86_64 --enable-kvm -hda /home/$USER/media-vps/vbox/gentoo/gentoo.qcow -vga std -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default"
+#    bindsym x exec qemu-system-x86_64 --enable-kvm /home/$USER/media-vps/vbox/xubuntu/xubuntu.qcow -vga vmware -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default" 
+	bindsym x exec qemu-system-x86_64 --enable-kvm /home/$USER/media-vps/vbox/xubuntu/xubuntu.qcow -vga vmware -m 2048 -cpu host -usbdevice tablet, mode "default" 
     bindsym b exec qemu-system-x86_64 --enable-kvm -cdrom /mnt/media-vps/isoos/archling-bank-2014.08.03-x86_64.iso -vga vmware -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default"
     bindsym v exec virt-manager , mode "default"
-    bindsym w exec qemu-system-x86_64 --enable-kvm /home/mark/media-vps/vbox/win-7/win-7.img -vga std -m 2048 -smp 2 -usbdevice tablet, mode "default" 
-    bindsym t exec qemu-system-x86_64 --enable-kvm -cdrom /home/mark/media-vps/isoos/install-amd64-minimal-20130110.iso -vga vmware -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default"
+    bindsym w exec qemu-system-x86_64 --enable-kvm /home/$USER/media-vps/vbox/win-7/win-7.img -vga std -m 2048 -smp 2 -usbdevice tablet, mode "default" 
+    bindsym t exec qemu-system-x86_64 --enable-kvm -cdrom /home/$USER/media-vps/isoos/install-amd64-minimal-20130110.iso -vga vmware -m 2048 -smp 2 -cpu host -usbdevice tablet, mode "default"
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -565,46 +565,6 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 bindsym $mod+Pause mode "$mode_system"
-
-
-######################
-# Restore workspaces #
-######################
-
-
-##################
-# Lock workspace #
-##################
-
-set $mode_screen Multi-monitor setup: (c)lock all, (e)lock screen-1, (l)lock screen-2, (s)lock whatever
-mode "$mode_screen" {
-    bindsym c exec --no-startup-id i3lock --output $OUTPUT_E --auto --output $OUTPUT_I --auto
-    bindsym e exec --no-startup-id i3lock --output $OUTPUT_E --auto --output $OUTPUT_I --off
-    bindsym i exec --no-startup-id i3lock --output $OUTPUT_I --auto --output $OUTPUT_E --off
-    bindsym s exec --no-startup-id i3lock --output $OUTPUT_I --auto && xrandr --output $OUTPUT_E --right-of $OUTPUT_I
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+Ctrl+m mode "$mode_screen"
-
-
-###########
-# Back Up #
-###########
-
-set $mode_backup BackUp (a) all-1, (e) etc, (h) home, (s) sys
-mode "$mode_backup" {
-    bindsym a exec sudo rsync -aAXv  /* /run/media/mark/bak-n75/back-sys --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*",/lost+found}"
-    bindsym e exec xterm -hold -e "sudo rsync -aAXv --delete /etc/* /run/media/mark/WAYBACK/etc --exclude={/lost+found}"
-    bindsym h exec xterm -hold -e "sudo rsync -aAXv --delete /home/* /run/media/mark/WAYBACK/home --exclude={/lost+found}"
-    bindsym s exec --no-startup-id xterm -e sudo rsync & sudo rsync -aAXv --delete /* /run/media/mark/WAYBACK/back-sys --exclude={/dev/*,/etc/*,/home/*,/media/*,/mnt/*,/proc/*,/run/*,/sys/*,/tmp/*,/lost+found} , mode "default"
-    bindsym m exec sudo rsync -aAXv /mnt/media-vps/* /run/media/mark/bak-n75/back-data --exclude={/.Trash-1000}"
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+b mode "$mode_backup"
 
 
 ##############################
